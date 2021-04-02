@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="messaging">
+    <div class="inbox_msg">
+      <div class="inbox_people">
+        <div class="headind_srch">
+          <div class="recent_heading">
+            <h4>Home</h4>
+          </div>
+        </div>
+        <div class="inbox_chat">
+          <div class="noUserMessage" *ngIf="users == null || users?.length == 0">No users</div>
+          <div class="chat_list active_chat" *ngFor="let user of users; let i = index;" (click)="setCurrentReceiver(user, i)" [ngClass]="{'highlightChat': selectedIndex === i}">
+            <div class="chat_people">
+              <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt=""> </div>
+              <div class="chat_ib">
+                <h5>{{user['name']}} <span class="chat_date">></span></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mesgs">
+        <div class="msg_history">
+          <div class="noConverstionMessage" *ngIf="chatHistory?.length == 0">No conversation</div>
+          <div class="noConverstionMessage" *ngIf="chatHistory == null">Select a user to start conversation</div>
+          <div [ngClass]="chat.senderId != sender? 'incoming_msg' : 'outgoing_msg'" *ngFor="let chat of chatHistory">
+            <div *ngIf="chat.senderId != sender" class="incoming_msg_img"> <img
+                src="https://ptetutorials.com/images/user-profile.png" alt=""> </div>
+            <div [ngClass]="chat.senderId != sender? 'received_msg' : 'sent_msg'">
+              <div [ngClass]="chat.senderId != sender? 'received_withd_msg' : ''">
+                <p *ngIf="!chat.isImage" >{{chat.message}}</p>
+                <img *ngIf="chat.isImage" [src]="chat.message" />
+                <span class="time_date"> {{chat.timeSent}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="type_msg">
+          <div class="input_msg_write">
+            <input type="text" (keydown.enter)="send()" [(ngModel)]="message" class="write_msg" placeholder="Type a message" />
+            <button (click)="attachFile()" class="msg_attach_btn" type="button">
+              <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+            </button>
+            <input (change)="fileChangeEvent($event)" id="attachInput" class="hiddenAttachInput" type="file" />
+            <button [ngClass]="{'disabled' : message==''}" (click)="send()" class="msg_send_btn" type="button">
+              <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

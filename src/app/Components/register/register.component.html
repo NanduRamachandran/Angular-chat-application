@@ -1,0 +1,62 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6 login-section-wrapper">
+      <div class="brand-wrapper">
+      </div>
+      <div class="login-wrapper my-auto">
+        <h1 class="login-title">Register User</h1>
+        <form name="form" [formGroup]="RegistrationForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              [ngClass]="{'is-invalid':RegistrationForm.get('name')?.touched && RegistrationForm.get('name')?.invalid}"
+              type="name" name="name" id="name" formControlName="name" class="form-control" placeholder="Bill">
+            <span class="help-block"
+              *ngIf="RegistrationForm.get('name')?.invalid && RegistrationForm.get('name')?.touched">
+              <div *ngIf="RegistrationForm.get('name')?.errors?.required">Name is required</div>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              [ngClass]="{'is-invalid':RegistrationForm.get('email')?.touched && RegistrationForm.get('email')?.invalid}"
+              type="email" name="email" id="email" class="form-control" formControlName="email"
+              placeholder="email@example.com">
+            <span class="help-block"
+              *ngIf="RegistrationForm.get('email')?.invalid && RegistrationForm.get('email')?.touched">
+              <div *ngIf="RegistrationForm.get('email')?.errors?.required">Email is required</div>
+              <div *ngIf="RegistrationForm.get('email')?.errors?.email">Email must be a valid email address</div>
+            </span>
+          </div>
+          <div class="form-group mb-4">
+            <label for="password">Password</label>
+            <input
+              [ngClass]="{'is-invalid':RegistrationForm.get('password')?.touched && RegistrationForm.get('password')?.invalid}"
+              type="password" name="password" formControlName="password" id="password" class="form-control"
+              placeholder="enter your passsword">
+            <span class="help-block"
+              *ngIf="RegistrationForm.get('password')?.invalid && RegistrationForm.get('password')?.touched">
+              <div *ngIf="RegistrationForm.get('password')?.errors?.required">Password is required</div>
+            </span>
+          </div>
+          <div class="form-group mb-4">
+            <label for="repassword">Re-enter Password</label>
+            <input
+              [ngClass]="{'is-invalid':RegistrationForm.get('repassword')?.touched && RegistrationForm.get('repassword')?.invalid}"
+              type="password" name="repassword" id="repassword" formControlName="repassword" class="form-control"
+              placeholder="re-enter your passsword">
+            <span class="help-block"
+              *ngIf="RegistrationForm.get('repassword')?.invalid && RegistrationForm.get('repassword')?.touched">
+              <div *ngIf="RegistrationForm.get('repassword')?.errors?.required">Re-enter password is required</div>
+            </span>
+          </div>
+          <input (click)="RegisterUser()" name="register" id="register" class="btn btn-block login-btn" type="button"
+            value="Register">
+        </form>
+      </div>
+    </div>
+    <div class="col-sm-6 px-0 d-none d-sm-block">
+      <img src="assets/images/login.jpg" alt="login image" class="login-img">
+    </div>
+  </div>
+</div>
